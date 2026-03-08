@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.env
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# SQLite databases
+*.db
+*.sqlite3
+japanalpha_traces.db
+
+# VS Code / IDEs
+.vscode/
+.idea/
