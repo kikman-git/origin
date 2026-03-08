@@ -55,3 +55,23 @@ body {
 .animate-slam-in {
   animation: slam-in 0.3s ease-out forwards;
 }
+
+@keyframes satellite-scan {
+  0% { top: -2px; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.animate-satellite-scan {
+  animation: satellite-scan 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  animation: shimmer 3s ease-in-out infinite;
+}

@@ -260,9 +260,13 @@ export default function Home() {
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            {/* Left: Agent Flow + Debate + Verdict + Dashboard — 3 cols */}
+            {/* Left: Agent Flow + Sources + Debate + Verdict + Dashboard — 3 cols */}
             <div className="lg:col-span-3 space-y-4">
               <AgentGraph agents={agents} highlightedEvidence={highlightedEvidence} />
+
+              {allTools.some((t) => t.status === "completed" && t.evidence_id) && (
+                <DataSourcesPanel tools={allTools} />
+              )}
 
               {debateEvents.length > 0 && (
                 <DebatePanel
@@ -285,9 +289,8 @@ export default function Home() {
               )}
             </div>
 
-            {/* Right sidebar: Sources + Log — 1 col */}
+            {/* Right sidebar: Log — 1 col */}
             <div className="lg:col-span-1 space-y-4">
-              <DataSourcesPanel tools={allTools} />
               <LogPanel logs={logs} highlightedEvidence={highlightedEvidence} />
             </div>
           </div>
