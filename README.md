@@ -6,7 +6,8 @@
 > 📄 **[View Our Pitch Deck (PDF)](./pitch_deck.pdf)** | 🎬 **[Watch Our Demo (YouTube)](https://www.youtube.com/watch?v=9c2j8wctNhs)**
 
 ### **Watch Our Demo Video**
-https://github.com/kikman-git/nousalpha/raw/master/demo.mov
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/9c2j8wctNhs?si=5nFfgdN2SBoblHZZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ---
 
