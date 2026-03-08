@@ -22,7 +22,6 @@ app.add_middleware(
 analysis_logs: dict[str, list[dict]] = {}
 
 
-<<<<<<< HEAD
 def get_mock_events(company: str) -> list[dict]:
     """Generate mock SSE events for Akatsuki (3932.T) style analysis with 4 data-source agents."""
     return [
@@ -180,33 +179,33 @@ def get_mock_events(company: str) -> list[dict]:
 
         # ── Round 1 ──
         {"agent": "bull", "status": "running", "message": "Kaiju No.8 proves the IP monetization engine works — JPY 2B+ in month one, 40% overseas", "phase": "debate", "debate_round": 1, "delay": 1.0,
-         "argument": {"position": "bull", "round": 1, "text": "The Kaiju No.8 game launch validates Akatsuki's core thesis: they can monetize IP at scale globally. JPY 2B+ revenue in the first month with 40% overseas ratio demonstrates genuine international demand, not just domestic hype.", "evidence_ids": ["ev-co-3", "ev-ir-2"], "strength": 0.85}},
+         "argument": {"position": "bull", "round": 1, "text": "Kaiju No.8: JPY 2B+ in month one, 40% overseas. This IP engine is PROVEN.", "evidence_ids": ["ev-co-3", "ev-ir-2"], "strength": 0.85}},
 
-        {"agent": "bear", "status": "running", "message": "One hit game does not make a sustainable business — existing titles are declining YoY", "phase": "debate", "debate_round": 1, "delay": 1.0,
-         "argument": {"position": "bear", "round": 1, "text": "Mobile gaming is a hit-driven business. Existing titles showed YoY revenue decline in Q1. Kaiju No.8 is a single title — this is classic single-game dependency risk. Meanwhile, the Papabubble candy acquisition signals management distraction from core competency.", "evidence_ids": ["ev-ir-2", "ev-ir-3"], "strength": 0.72}},
+        {"agent": "bear", "status": "running", "message": "One hit game does not make a sustainable business", "phase": "debate", "debate_round": 1, "delay": 1.0,
+         "argument": {"position": "bear", "round": 1, "text": "One hit title? Classic single-game dependency. Legacy titles declining YoY. Papabubble acquisition = distraction.", "evidence_ids": ["ev-ir-2", "ev-ir-3"], "strength": 0.72}},
 
-        {"agent": "judge", "status": "running", "message": "Both points noted. Bull's IP thesis is data-backed. Bear raises valid concentration risk.", "phase": "debate", "debate_round": 1, "delay": 0.6,
-         "argument": {"position": "judge", "round": 1, "text": "Bull presents strong evidence of IP monetization capability. Bear correctly identifies single-title concentration risk. Bull — address the legacy title revenue decline.", "ruling": "continue"}},
+        {"agent": "judge", "status": "running", "message": "Both points noted.", "phase": "debate", "debate_round": 1, "delay": 0.6,
+         "argument": {"position": "judge", "round": 1, "text": "Bull's IP thesis is data-backed. Bear raises valid concentration risk.", "ruling": "continue"}},
 
         # ── Round 2 ──
         {"agent": "bull", "status": "running", "message": "The 3-segment pivot IS the answer to concentration risk — plus satellite confirms physical expansion", "phase": "debate", "debate_round": 2, "delay": 1.0,
-         "argument": {"position": "bull", "round": 2, "text": "The restructuring to 3 segments (Game/Comic, Entertainment/Lifestyle, AI-DX) directly addresses concentration risk. This is not just gaming anymore. Furthermore, satellite imagery independently confirms physical expansion — new building signage at HQ and 3,200 daily visitors at Kaiju No.8 pop-ups. You cannot fake satellite data.", "evidence_ids": ["ev-ir-3", "ev-sat-2", "ev-sat-3"], "strength": 0.88}},
+         "argument": {"position": "bull", "round": 2, "text": "3 new segments = diversified. Satellite confirms HQ expansion + 3,200/day at pop-ups. You can't fake satellite data.", "evidence_ids": ["ev-ir-3", "ev-sat-2", "ev-sat-3"], "strength": 0.88}},
 
-        {"agent": "bear", "status": "running", "message": "Three simultaneous strategic shifts multiply execution risk — unproven segments", "phase": "debate", "debate_round": 2, "delay": 1.0,
-         "argument": {"position": "bear", "round": 2, "text": "Diversification on paper is not diversification in practice. AI-DX Solutions is unproven. Papabubble is a candy company — the synergy thesis is speculative. Two M&A integrations entering consolidation in H2 with no proven contribution yet. Management is spreading too thin across 3 strategic bets simultaneously.", "evidence_ids": ["ev-ir-3", "ev-co-3"], "strength": 0.68}},
+        {"agent": "bear", "status": "running", "message": "Three simultaneous strategic shifts = execution risk", "phase": "debate", "debate_round": 2, "delay": 1.0,
+         "argument": {"position": "bear", "round": 2, "text": "AI-DX unproven. Papabubble = candy?! 2 M&A integrations in H2. Management spreading too thin.", "evidence_ids": ["ev-ir-3", "ev-co-3"], "strength": 0.68}},
 
-        {"agent": "judge", "status": "running", "message": "Satellite evidence is compelling — hard to argue against physical signals. But M&A integration risk is real.", "phase": "debate", "debate_round": 2, "delay": 0.6,
-         "argument": {"position": "judge", "round": 2, "text": "Bull's satellite evidence is particularly compelling — alternative data that cannot be manipulated through traditional disclosure. However, Bear raises a legitimate point about execution risk across multiple strategic bets. Final round — closing arguments.", "ruling": "continue"}},
+        {"agent": "judge", "status": "running", "message": "Satellite evidence is compelling.", "phase": "debate", "debate_round": 2, "delay": 0.6,
+         "argument": {"position": "judge", "round": 2, "text": "Satellite data can't be manipulated. But execution risk is real. Final round.", "ruling": "continue"}},
 
         # ── Round 3 (Final) ──
         {"agent": "bull", "status": "running", "message": "19 VC exits, DOE raised to 4%, METI tailwind, convergent evidence across ALL 4 data sources", "phase": "debate", "debate_round": 3, "delay": 1.0,
-         "argument": {"position": "bull", "round": 3, "text": "The investment case is supported by convergent evidence across all 4 independent data sources — not just one. 19 cumulative VC exits including 4 IPOs prove capital allocation skill. DOE raised to 4% shows shareholder alignment. METI's JPY 500B content export policy is a direct tailwind. Management's 0.81 confidence score in tone analysis shows genuine conviction, not scripted optimism.", "evidence_ids": ["ev-ir-2", "ev-nw-2", "ev-co-3", "ev-nw-3"], "strength": 0.90}},
+         "argument": {"position": "bull", "round": 3, "text": "4 data sources converge. 19 VC exits, 4 IPOs. DOE 4%. METI JPY 500B tailwind. Conviction: 0.81.", "evidence_ids": ["ev-ir-2", "ev-nw-2", "ev-co-3", "ev-nw-3"], "strength": 0.90}},
 
-        {"agent": "bear", "status": "running", "message": "The valuation already prices in growth — downside risk is asymmetric if Kaiju No.8 fades", "phase": "debate", "debate_round": 3, "delay": 1.0,
-         "argument": {"position": "bear", "round": 3, "text": "I acknowledge the multi-source evidence is strong. But the market is not blind — positive sentiment is already reflected in the price. If Kaiju No.8 revenue decays at typical mobile game rates, the entire growth narrative collapses. The BOJ rate environment may not hold. I maintain this is a HOLD at best, not a BUY.", "evidence_ids": ["ev-co-3", "ev-nw-3", "ev-ir-2"], "strength": 0.60}},
+        {"agent": "bear", "status": "running", "message": "Valuation already prices in growth", "phase": "debate", "debate_round": 3, "delay": 1.0,
+         "argument": {"position": "bear", "round": 3, "text": "Market already priced in. If Kaiju No.8 decays at typical mobile rates, narrative collapses. HOLD at best.", "evidence_ids": ["ev-co-3", "ev-nw-3", "ev-ir-2"], "strength": 0.60}},
 
-        {"agent": "judge", "status": "running", "message": "Closing arguments received. Deliberating...", "phase": "debate", "debate_round": 3, "delay": 1.5,
-         "argument": {"position": "judge", "round": 3, "text": "Both counselors have presented their cases. Reviewing all evidence and arguments...", "ruling": "deliberating"}},
+        {"agent": "judge", "status": "running", "message": "Deliberating...", "phase": "debate", "debate_round": 3, "delay": 1.5,
+         "argument": {"position": "judge", "round": 3, "text": "Reviewing all evidence...", "ruling": "deliberating"}},
 
         # ── Phase 8: Judge's Verdict ──
         {"agent": "judge", "status": "completed", "message": "VERDICT: BUY — Bull's multi-source convergent evidence outweighs Bear's execution risk concerns", "phase": "verdict", "debate_round": 3, "delay": 1.0,
@@ -249,60 +248,66 @@ def get_mock_events(company: str) -> list[dict]:
 async def health_check():
     return {"status": "ok"}
 
-=======
-from graph import app as langgraph_app
-from langchain_core.messages import HumanMessage
->>>>>>> a1a5323 (Integrated Shisa.ai LLM and Crustdata B2B Intelligence into LangGraph MCP)
+
+# Try to import LangGraph — fall back to mock if unavailable
+try:
+    from graph import app as langgraph_app
+    from langchain_core.messages import HumanMessage
+    USE_LANGGRAPH = True
+except ImportError:
+    USE_LANGGRAPH = False
+
 
 @app.get("/api/analyze/{company}")
 async def analyze_company(company: str):
-    """SSE endpoint that streams LangGraph agent analysis events in real-time."""
+    """SSE endpoint that streams agent analysis events. Uses LangGraph if available, otherwise mock data."""
     run_id = str(uuid.uuid4())[:8]
     analysis_logs[run_id] = []
 
-    async def event_stream():
+    async def mock_stream():
         start_time = time.time()
-
-        # Send initial metadata
         meta = {"type": "meta", "run_id": run_id, "company": company, "timestamp": datetime.now().isoformat()}
         yield f"data: {json.dumps(meta, ensure_ascii=False)}\n\n"
-        
-        # Init message
+
+        for event in get_mock_events(company):
+            delay = event.pop("delay", 0.3)
+            await asyncio.sleep(delay)
+            elapsed = round(time.time() - start_time, 2)
+            log_entry = {"type": "agent_event", "run_id": run_id, "timestamp": datetime.now().isoformat(), "elapsed": elapsed, **event}
+            analysis_logs[run_id].append(log_entry)
+            yield f"data: {json.dumps(log_entry, ensure_ascii=False)}\n\n"
+
+        done = {"type": "done", "run_id": run_id, "elapsed": round(time.time() - start_time, 2)}
+        yield f"data: {json.dumps(done, ensure_ascii=False)}\n\n"
+
+    async def langgraph_stream():
+        start_time = time.time()
+        meta = {"type": "meta", "run_id": run_id, "company": company, "timestamp": datetime.now().isoformat()}
+        yield f"data: {json.dumps(meta, ensure_ascii=False)}\n\n"
+
         init_msg = {"type": "agent_event", "run_id": run_id, "timestamp": datetime.now().isoformat(), "elapsed": 0.0, "agent": "orchestrator", "status": "running", "message": f"Starting live LangGraph analysis of {company}", "phase": "init"}
         analysis_logs[run_id].append(init_msg)
         yield f"data: {json.dumps(init_msg, ensure_ascii=False)}\n\n"
 
-        # Run the Graph!
         try:
-            # We use astream to yield updates as nodes complete
             async for output in langgraph_app.astream({"company": company, "ticker": company, "raw_data": {}, "messages": []}):
-                # output is a dict keyed by node name (e.g., {"data_fetcher": {...state updates...}})
                 for node_name, state_updates in output.items():
-                    # The state returns the messages we appended
                     if "messages" in state_updates:
                         for msg in state_updates["messages"]:
                             elapsed = round(time.time() - start_time, 2)
-                            log_entry = {
-                                "type": "agent_event",
-                                "run_id": run_id,
-                                "timestamp": datetime.now().isoformat(),
-                                "elapsed": elapsed,
-                                **msg,
-                            }
+                            log_entry = {"type": "agent_event", "run_id": run_id, "timestamp": datetime.now().isoformat(), "elapsed": elapsed, **msg}
                             analysis_logs[run_id].append(log_entry)
                             yield f"data: {json.dumps(log_entry, ensure_ascii=False)}\n\n"
-                            # Small delay to ensure the UI renders the sequence cleanly
                             await asyncio.sleep(0.1)
-
         except Exception as e:
             err_msg = {"type": "agent_event", "run_id": run_id, "timestamp": datetime.now().isoformat(), "elapsed": round(time.time() - start_time, 2), "agent": "orchestrator", "status": "error", "message": f"Graph Execution Error: {str(e)}", "phase": "judgment"}
             yield f"data: {json.dumps(err_msg, ensure_ascii=False)}\n\n"
 
-        # Send done signal
         done = {"type": "done", "run_id": run_id, "elapsed": round(time.time() - start_time, 2)}
         yield f"data: {json.dumps(done, ensure_ascii=False)}\n\n"
 
-    return StreamingResponse(event_stream(), media_type="text/event-stream")
+    stream = langgraph_stream() if USE_LANGGRAPH else mock_stream()
+    return StreamingResponse(stream, media_type="text/event-stream")
 
 
 @app.get("/api/logs/{run_id}")

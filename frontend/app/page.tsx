@@ -5,6 +5,7 @@ import AgentGraph from "./components/AgentGraph";
 import DebatePanel from "./components/DebatePanel";
 import LogPanel from "./components/LogPanel";
 import JudgmentPanel from "./components/JudgmentPanel";
+import StockChart from "./components/StockChart";
 
 export type ToolTrace = {
   name: string;
@@ -231,10 +232,17 @@ export default function Home() {
                 />
               )}
               {judgment && (
-                <JudgmentPanel
-                  judgment={judgment}
-                  onEvidenceHover={setHighlightedEvidence}
-                />
+                <>
+                  <StockChart
+                    ticker="TSE:3932"
+                    signal={judgment.signal}
+                    confidence={judgment.confidence}
+                  />
+                  <JudgmentPanel
+                    judgment={judgment}
+                    onEvidenceHover={setHighlightedEvidence}
+                  />
+                </>
               )}
             </div>
             {/* Right: Log Panel */}
