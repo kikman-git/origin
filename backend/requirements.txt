@@ -1,0 +1,32 @@
+# Core
+fastapi
+uvicorn[standard]
+pydantic
+pydantic-settings
+python-dotenv
+requests
+httpx
+loguru
+
+# Data Ingestion
+beautifulsoup4
+lxml
+pandas
+numpy
+
+# AI & Agents
+langchain
+langgraph
+crewai
+autogen-agentchat
+openai
+anthropic
+
+# Concurrency & Cache
+redis
+celery
+
+# Testing
+pytest
+pytest-asyncio
+mock
