@@ -1,11 +1,16 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import dynamic from "next/dynamic";
+import { useState, useRef, useCallback, useEffect } from "react";
 import AgentGraph from "./components/AgentGraph";
 import DebatePanel from "./components/DebatePanel";
 import LogPanel from "./components/LogPanel";
-import JudgmentPanel from "./components/JudgmentPanel";
 import StockChart from "./components/StockChart";
+import DataSourcesPanel from "./components/DataSourcesPanel";
+import PredictionDashboard from "./components/PredictionDashboard";
+
+const AgentNetwork3D = dynamic(() => import("./components/AgentNetwork3D"), { ssr: false });
+const Verdict3D = dynamic(() => import("./components/Verdict3D"), { ssr: false });
 
 export type ToolTrace = {
   name: string;
@@ -81,6 +86,14 @@ export default function Home() {
   const [highlightedEvidence, setHighlightedEvidence] = useState<string[]>([]);
   const [debateEvents, setDebateEvents] = useState<AgentEvent[]>([]);
   const abortRef = useRef<AbortController | null>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll during analysis
+  useEffect(() => {
+    if (isRunning || judgment) {
+      bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+  }, [logs, debateEvents, judgment, isRunning]);
 
   const initAgents = useCallback(() => {
     const initial: Record<string, AgentState> = {};
@@ -89,6 +102,9 @@ export default function Home() {
     }
     return initial;
   }, []);
+
+  // Collect all tools from all agents
+  const allTools = Object.values(agents).flatMap((a) => a.tools);
 
   const startAnalysis = useCallback(async () => {
     if (!company.trim() || isRunning) return;
@@ -168,28 +184,28 @@ export default function Home() {
   }, [company, isRunning, initAgents]);
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-zinc-200">
+    <div className="min-h-screen bg-[#050510] text-zinc-200">
       {/* Header */}
-      <header className="border-b border-zinc-800 px-6 py-4">
-        <div className="mx-auto flex max-w-7xl items-center justify-between">
+      <header className="border-b border-zinc-800/50 px-6 py-4 bg-[#050510]/80 backdrop-blur-md sticky top-0 z-50">
+        <div className="mx-auto flex max-w-[1400px] items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center text-sm font-bold text-black">
+            <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center text-sm font-black text-black shadow-lg shadow-emerald-500/20">
               JA
             </div>
-            <h1 className="text-lg font-semibold tracking-tight">
-              JapanAlpha<span className="text-zinc-500 font-normal ml-2 text-sm">Mission Control</span>
+            <h1 className="text-lg font-bold tracking-tight">
+              JapanAlpha<span className="text-zinc-600 font-normal ml-2 text-sm">AI Hedge Fund</span>
             </h1>
           </div>
           <div className="flex items-center gap-2 text-xs text-zinc-500">
-            <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" />
+            <span className="inline-block h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
             System Online
           </div>
         </div>
       </header>
 
       {/* Search Bar */}
-      <div className="border-b border-zinc-800 px-6 py-5">
-        <div className="mx-auto max-w-7xl">
+      <div className="border-b border-zinc-800/50 px-6 py-5">
+        <div className="mx-auto max-w-[1400px]">
           <div className="flex gap-3">
             <input
               type="text"
@@ -197,13 +213,13 @@ export default function Home() {
               onChange={(e) => setCompany(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && startAnalysis()}
               placeholder="Enter company name (e.g. Toyota Motor)"
-              className="flex-1 rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-3 text-sm text-zinc-100 placeholder-zinc-500 outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+              className="flex-1 rounded-xl border border-zinc-700/50 bg-zinc-900/50 px-5 py-3.5 text-sm text-zinc-100 placeholder-zinc-600 outline-none focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 transition-all backdrop-blur-sm"
               disabled={isRunning}
             />
             <button
               onClick={startAnalysis}
               disabled={isRunning || !company.trim()}
-              className="rounded-lg bg-emerald-600 px-6 py-3 text-sm font-medium text-white transition-all hover:bg-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed"
+              className="rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 px-8 py-3.5 text-sm font-bold text-white transition-all hover:from-emerald-500 hover:to-emerald-400 disabled:opacity-30 disabled:cursor-not-allowed shadow-lg shadow-emerald-500/20"
             >
               {isRunning ? "Analyzing..." : "Analyze"}
             </button>
@@ -212,18 +228,24 @@ export default function Home() {
       </div>
 
       {/* Main Content */}
-      <div className="mx-auto max-w-7xl px-6 py-6">
+      <div className="mx-auto max-w-[1400px] px-6 py-6">
         {Object.keys(agents).length === 0 ? (
           <div className="flex flex-col items-center justify-center py-32 text-zinc-500">
-            <div className="text-6xl mb-6 opacity-30">&#x1F50D;</div>
-            <p className="text-lg">Enter a company name to start agent analysis</p>
-            <p className="text-sm mt-2 text-zinc-600">AI agents will collect and analyze data in real-time</p>
+            <div className="text-7xl mb-6 opacity-20">&#x1F50D;</div>
+            <p className="text-lg font-medium text-zinc-400">Enter a company name to start agent analysis</p>
+            <p className="text-sm mt-2 text-zinc-600">8 AI agents will collect and debate in real-time</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Left: Agent Graph + Judgment */}
-            <div className="lg:col-span-2">
-              <AgentGraph agents={agents} highlightedEvidence={highlightedEvidence} />
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            {/* Left: 3D + Agent Graph + Debate + Verdict — 3 cols */}
+            <div className="lg:col-span-3 space-y-4">
+              {/* 3D Network + SVG Agent Graph side by side */}
+              <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+                <AgentNetwork3D agents={agents} highlightedEvidence={highlightedEvidence} />
+                <AgentGraph agents={agents} highlightedEvidence={highlightedEvidence} />
+              </div>
+
+              {/* Debate */}
               {debateEvents.length > 0 && (
                 <DebatePanel
                   events={debateEvents}
@@ -231,26 +253,29 @@ export default function Home() {
                   onEvidenceHover={setHighlightedEvidence}
                 />
               )}
+
+              {/* Verdict + Prediction */}
               {judgment && (
                 <>
+                  <Verdict3D signal={judgment.signal} confidence={judgment.confidence} />
+                  <PredictionDashboard signal={judgment.signal} confidence={judgment.confidence} />
                   <StockChart
                     ticker="TSE:3932"
                     signal={judgment.signal}
                     confidence={judgment.confidence}
                   />
-                  <JudgmentPanel
-                    judgment={judgment}
-                    onEvidenceHover={setHighlightedEvidence}
-                  />
                 </>
               )}
             </div>
-            {/* Right: Log Panel */}
-            <div className="lg:col-span-1">
+
+            {/* Right sidebar: Sources + Log — 1 col */}
+            <div className="lg:col-span-1 space-y-4">
+              <DataSourcesPanel tools={allTools} />
               <LogPanel logs={logs} highlightedEvidence={highlightedEvidence} />
             </div>
           </div>
         )}
+        <div ref={bottomRef} />
       </div>
     </div>
   );
