@@ -9,10 +9,10 @@ type Props = {
 
 const CENTER_X = 500;
 const CHILD_POSITIONS = [
-  { id: "ir", x: 125, color: "#06b6d4", label: "IR / Filings" },
-  { id: "audio", x: 375, color: "#f59e0b", label: "Audio / Transcripts" },
-  { id: "macro", x: 625, color: "#22c55e", label: "Macro / Policy" },
-  { id: "satellite", x: 875, color: "#ec4899", label: "Geospatial" },
+  { id: "ir", x: 125, color: "#06b6d4", label: "IR Agent" },
+  { id: "company", x: 375, color: "#f59e0b", label: "Company Agent" },
+  { id: "news", x: 625, color: "#22c55e", label: "News Agent" },
+  { id: "satellite", x: 875, color: "#ec4899", label: "Satellite Agent" },
 ];
 
 function flattenObj(obj: Record<string, unknown>): string[] {
@@ -85,8 +85,8 @@ function AgentNode({ x, y, label, color, status }: {
   );
 }
 
-function ToolCard({ tool, x, y, color, highlighted }: {
-  tool: ToolTrace; x: number; y: number; color: string; highlighted: boolean;
+function ToolCard({ tool, x, y, color, highlighted, cardId }: {
+  tool: ToolTrace; x: number; y: number; color: string; highlighted: boolean; cardId: string;
 }) {
   const isDone = tool.status === "completed";
   const inputLines = tool.input ? flattenObj(tool.input) : [];
@@ -96,9 +96,15 @@ function ToolCard({ tool, x, y, color, highlighted }: {
   const headerH = 22;
   const gap = outputLines.length > 0 && inputLines.length > 0 ? 6 : 0;
   const h = headerH + (inputLines.length + outputLines.length) * lineH + gap + 10;
+  const clipId = `clip-${cardId}`;
 
   return (
     <g>
+      <defs>
+        <clipPath id={clipId}>
+          <rect x={x - w / 2} y={y} width={w} height={h} rx={8} />
+        </clipPath>
+      </defs>
       {highlighted && (
         <rect x={x - w / 2 - 3} y={y - 3} width={w + 6} height={h + 6} rx={10}
           fill="none" stroke="#22c55e" strokeWidth={2} opacity={0.8} className="animate-pulse-glow" />
@@ -106,50 +112,52 @@ function ToolCard({ tool, x, y, color, highlighted }: {
       <rect x={x - w / 2} y={y} width={w} height={h} rx={8}
         fill={highlighted ? "#052e1620" : "#0a0a12"}
         stroke={highlighted ? "#22c55e40" : color + "15"} strokeWidth={1} />
-      {/* Left accent */}
-      <rect x={x - w / 2} y={y + 4} width={2.5} height={h - 8} rx={1}
-        fill={isDone ? color : "#eab308"} opacity={highlighted ? 1 : 0.4} />
-      {/* Tool name header */}
-      <text x={x - w / 2 + 10} y={y + 16} fontSize={11} fontWeight={700}
-        fill={isDone ? color : "#eab308"}
-        fontFamily="var(--font-geist-mono), monospace">
-        {tool.name}
-      </text>
-      {/* Evidence badge */}
-      {tool.evidence_id && (
-        <>
-          <rect x={x + w / 2 - 60} y={y + 4} width={56} height={16} rx={4}
-            fill={highlighted ? "#22c55e15" : "#ffffff05"} />
-          <text x={x + w / 2 - 32} y={y + 15} fontSize={9}
-            fill={highlighted ? "#4ade80" : "#3f3f46"} textAnchor="middle"
+      <g clipPath={`url(#${clipId})`}>
+        {/* Left accent */}
+        <rect x={x - w / 2} y={y + 4} width={2.5} height={h - 8} rx={1}
+          fill={isDone ? color : "#eab308"} opacity={highlighted ? 1 : 0.4} />
+        {/* Tool name header */}
+        <text x={x - w / 2 + 10} y={y + 16} fontSize={11} fontWeight={700}
+          fill={isDone ? color : "#eab308"}
+          fontFamily="var(--font-geist-mono), monospace">
+          {tool.name}
+        </text>
+        {/* Evidence badge */}
+        {tool.evidence_id && (
+          <>
+            <rect x={x + w / 2 - 60} y={y + 4} width={56} height={16} rx={4}
+              fill={highlighted ? "#22c55e15" : "#ffffff05"} />
+            <text x={x + w / 2 - 32} y={y + 15} fontSize={9}
+              fill={highlighted ? "#4ade80" : "#3f3f46"} textAnchor="middle"
+              fontFamily="var(--font-geist-mono), monospace">
+              {tool.evidence_id}
+            </text>
+          </>
+        )}
+        {/* Input */}
+        {inputLines.map((line, i) => (
+          <text key={`in-${i}`} x={x - w / 2 + 10} y={y + headerH + 8 + i * lineH}
+            fontSize={10} fill="#a1a1aa"
             fontFamily="var(--font-geist-mono), monospace">
-            {tool.evidence_id}
+            {line}
           </text>
-        </>
-      )}
-      {/* Input */}
-      {inputLines.map((line, i) => (
-        <text key={`in-${i}`} x={x - w / 2 + 10} y={y + headerH + 8 + i * lineH}
-          fontSize={10} fill="#a1a1aa"
-          fontFamily="var(--font-geist-mono), monospace">
-          {line}
-        </text>
-      ))}
-      {/* Divider */}
-      {gap > 0 && (
-        <line x1={x - w / 2 + 10} y1={y + headerH + inputLines.length * lineH + 3}
-          x2={x + w / 2 - 10} y2={y + headerH + inputLines.length * lineH + 3}
-          stroke="#ffffff08" strokeWidth={0.5} />
-      )}
-      {/* Output */}
-      {outputLines.map((line, i) => (
-        <text key={`out-${i}`} x={x - w / 2 + 10}
-          y={y + headerH + inputLines.length * lineH + gap + 8 + i * lineH}
-          fontSize={10} fill={highlighted ? "#86efac" : "#52525b"}
-          fontFamily="var(--font-geist-mono), monospace">
-          {line}
-        </text>
-      ))}
+        ))}
+        {/* Divider */}
+        {gap > 0 && (
+          <line x1={x - w / 2 + 10} y1={y + headerH + inputLines.length * lineH + 3}
+            x2={x + w / 2 - 10} y2={y + headerH + inputLines.length * lineH + 3}
+            stroke="#ffffff08" strokeWidth={0.5} />
+        )}
+        {/* Output */}
+        {outputLines.map((line, i) => (
+          <text key={`out-${i}`} x={x - w / 2 + 10}
+            y={y + headerH + inputLines.length * lineH + gap + 8 + i * lineH}
+            fontSize={10} fill={highlighted ? "#86efac" : "#52525b"}
+            fontFamily="var(--font-geist-mono), monospace">
+            {line}
+          </text>
+        ))}
+      </g>
     </g>
   );
 }
@@ -232,7 +240,8 @@ export default function AgentGraph({ agents, highlightedEvidence }: Props) {
       elements.push(
         <ToolCard key={`tool-${child.id}-${i}`}
           tool={tool} x={child.x} y={toolY}
-          color={child.color} highlighted={isHighlighted} />
+          color={child.color} highlighted={isHighlighted}
+          cardId={`${child.id}-${i}`} />
       );
 
       toolY += getToolCardHeight(tool) + 12;

@@ -44,10 +44,10 @@ export type AgentState = {
 
 const AGENT_CONFIG: Record<string, string> = {
   orchestrator: "Orchestrator",
-  ir: "IR / Filings",
-  audio: "Audio / Transcripts",
-  macro: "Macro / Policy",
-  satellite: "Geospatial",
+  ir: "IR Agent",
+  company: "Company Agent",
+  news: "News Agent",
+  satellite: "Satellite Agent",
 };
 
 export default function Home() {
