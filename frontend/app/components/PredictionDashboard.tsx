@@ -12,11 +12,25 @@ type BetaData = {
   factors: { factor: string; severity: number; evidence_ids: string[] }[];
 };
 
+type ThesisItem = {
+  claim: string;
+  evidence_ids: string[];
+};
+
 type Props = {
   signal: string;
   confidence: number;
   alpha?: AlphaData;
   beta?: BetaData;
+  thesis?: ThesisItem[];
+  risks?: ThesisItem[];
+  summary?: string;
+  debateSummary?: {
+    rounds: number;
+    bull_score: string;
+    bear_score: string;
+    verdict_basis: string;
+  };
 };
 
 // Mock stock price data for Akatsuki TYO:3932
@@ -270,77 +284,170 @@ function AlphaBetaPanel({ alpha, beta }: { alpha?: AlphaData; beta?: BetaData })
   );
 }
 
-export default function PredictionDashboard({ signal, confidence, alpha, beta }: Props) {
+export default function PredictionDashboard({ signal, confidence, alpha, beta, thesis, risks, summary, debateSummary }: Props) {
   const maxSeg = Math.max(...SEGMENT_DATA.map((s) => s.current));
+  const signalColor = signal === "BUY" ? "emerald" : signal === "SELL" ? "red" : "amber";
 
   return (
-    <div className="mt-4 rounded-xl border border-zinc-700/50 bg-zinc-950/80 overflow-hidden animate-fade-in-up">
-      <div className="px-5 py-3 border-b border-zinc-800/50 flex items-center justify-between">
-        <span className="text-sm font-bold text-zinc-200">Investment Analysis Dashboard</span>
-        <div className="flex items-center gap-3">
-          <span className={`text-sm font-black ${signal === "BUY" ? "text-emerald-400" : "text-red-400"}`}>
-            {signal}
-          </span>
-          <span className="text-[10px] text-zinc-500">{confidence}% confidence</span>
+    <div className="space-y-4">
+      {/* Signal Header Card */}
+      <div className={`rounded-xl border bg-zinc-950/80 overflow-hidden border-${signalColor}-500/30`}>
+        <div className={`px-6 py-5 bg-gradient-to-r from-${signalColor}-950/40 via-zinc-900 to-zinc-950`}>
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-1">Akatsuki Inc. (TYO: 3932)</div>
+              <div className="flex items-center gap-4">
+                <span className={`text-4xl font-black text-${signalColor}-400`}>{signal}</span>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <div className="h-2.5 w-32 rounded-full bg-zinc-800 overflow-hidden">
+                      <div
+                        className={`h-full rounded-full bg-${signalColor}-500 transition-all duration-1000`}
+                        style={{ width: `${confidence}%` }}
+                      />
+                    </div>
+                    <span className="text-sm font-bold text-zinc-300">{confidence}%</span>
+                  </div>
+                  <div className="text-[10px] text-zinc-500 mt-1">AI Confidence Score</div>
+                </div>
+              </div>
+            </div>
+            {debateSummary && (
+              <div className="text-right space-y-1">
+                <div className="text-[9px] text-zinc-500 uppercase tracking-wider">Debate Result</div>
+                <div className="text-[10px]">
+                  <span className="text-green-400">Bull: </span>
+                  <span className="text-zinc-400">{debateSummary.bull_score}</span>
+                </div>
+                <div className="text-[10px]">
+                  <span className="text-red-400">Bear: </span>
+                  <span className="text-zinc-400">{debateSummary.bear_score}</span>
+                </div>
+              </div>
+            )}
+          </div>
+          {summary && (
+            <p className="text-xs text-zinc-400 leading-relaxed mt-3 max-w-3xl">{summary}</p>
+          )}
         </div>
       </div>
 
-      <div className="p-5 space-y-5">
-        {/* Line Chart */}
-        <LineChart />
-
-        {/* Metric Cards */}
-        <div className="grid grid-cols-4 gap-3">
-          {METRICS.map((m) => (
-            <div key={m.label} className="rounded-xl bg-zinc-900/50 border border-zinc-800/50 px-4 py-3">
-              <div className="text-[9px] text-zinc-500 uppercase tracking-wider">{m.label}</div>
-              <div className="text-lg font-bold text-zinc-100 mt-1">{m.value}</div>
-              <div className={`text-xs mt-0.5 font-medium ${m.positive ? "text-emerald-400" : "text-red-400"}`}>
-                {m.positive ? "\u2191" : "\u2193"} {m.change}
-              </div>
-            </div>
-          ))}
+      {/* Main Dashboard */}
+      <div className="rounded-xl border border-zinc-700/50 bg-zinc-950/80 overflow-hidden">
+        <div className="px-5 py-3 border-b border-zinc-800/50">
+          <span className="text-sm font-bold text-zinc-200">Investment Analysis Dashboard</span>
         </div>
 
-        {/* Alpha / Beta */}
-        <AlphaBetaPanel alpha={alpha} beta={beta} />
+        <div className="p-5 space-y-5">
+          {/* Line Chart */}
+          <LineChart />
 
-        {/* Segment Revenue */}
-        <div className="rounded-xl border border-zinc-800/50 bg-zinc-900/30 p-4">
-          <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-3">Segment Revenue (JPY B)</div>
-          <div className="grid grid-cols-3 gap-4">
-            {SEGMENT_DATA.map((seg) => (
-              <div key={seg.label}>
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-[11px] text-zinc-300">{seg.label}</span>
-                  <span className="text-[11px] text-zinc-400 font-mono">{seg.current}B</span>
-                </div>
-                <div className="flex gap-1 items-center">
-                  <div className="flex-1 h-6 bg-zinc-800/50 rounded overflow-hidden relative">
-                    {seg.prev > 0 && (
-                      <div
-                        className="absolute h-full rounded opacity-30"
-                        style={{ width: `${(seg.prev / maxSeg) * 100}%`, backgroundColor: seg.color }}
-                      />
-                    )}
-                    <div
-                      className="h-full rounded transition-all duration-1000 relative"
-                      style={{ width: `${(seg.current / maxSeg) * 100}%`, backgroundColor: seg.color, opacity: 0.8 }}
-                    />
-                  </div>
-                  {seg.prev > 0 ? (
-                    <span className="text-[9px] text-emerald-400 w-10 text-right font-mono">
-                      +{Math.round(((seg.current - seg.prev) / seg.prev) * 100)}%
-                    </span>
-                  ) : (
-                    <span className="text-[9px] text-purple-400 w-10 text-right">NEW</span>
-                  )}
+          {/* Metric Cards */}
+          <div className="grid grid-cols-4 gap-3">
+            {METRICS.map((m) => (
+              <div key={m.label} className="rounded-xl bg-zinc-900/50 border border-zinc-800/50 px-4 py-3">
+                <div className="text-[9px] text-zinc-500 uppercase tracking-wider">{m.label}</div>
+                <div className="text-lg font-bold text-zinc-100 mt-1">{m.value}</div>
+                <div className={`text-xs mt-0.5 font-medium ${m.positive ? "text-emerald-400" : "text-red-400"}`}>
+                  {m.positive ? "\u2191" : "\u2193"} {m.change}
                 </div>
               </div>
             ))}
           </div>
+
+          {/* Alpha / Beta */}
+          <AlphaBetaPanel alpha={alpha} beta={beta} />
+
+          {/* Segment Revenue */}
+          <div className="rounded-xl border border-zinc-800/50 bg-zinc-900/30 p-4">
+            <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-3">Segment Revenue (JPY B)</div>
+            <div className="grid grid-cols-3 gap-4">
+              {SEGMENT_DATA.map((seg) => (
+                <div key={seg.label}>
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-[11px] text-zinc-300">{seg.label}</span>
+                    <span className="text-[11px] text-zinc-400 font-mono">{seg.current}B</span>
+                  </div>
+                  <div className="flex gap-1 items-center">
+                    <div className="flex-1 h-6 bg-zinc-800/50 rounded overflow-hidden relative">
+                      {seg.prev > 0 && (
+                        <div
+                          className="absolute h-full rounded opacity-30"
+                          style={{ width: `${(seg.prev / maxSeg) * 100}%`, backgroundColor: seg.color }}
+                        />
+                      )}
+                      <div
+                        className="h-full rounded transition-all duration-1000 relative"
+                        style={{ width: `${(seg.current / maxSeg) * 100}%`, backgroundColor: seg.color, opacity: 0.8 }}
+                      />
+                    </div>
+                    {seg.prev > 0 ? (
+                      <span className="text-[9px] text-emerald-400 w-10 text-right font-mono">
+                        +{Math.round(((seg.current - seg.prev) / seg.prev) * 100)}%
+                      </span>
+                    ) : (
+                      <span className="text-[9px] text-purple-400 w-10 text-right">NEW</span>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
+
+      {/* Thesis & Risks */}
+      {(thesis || risks) && (
+        <div className="grid grid-cols-2 gap-4">
+          {/* Investment Thesis */}
+          {thesis && thesis.length > 0 && (
+            <div className="rounded-xl border border-emerald-500/20 bg-emerald-950/10 p-4">
+              <div className="text-[10px] font-bold text-emerald-500 uppercase tracking-wider mb-3">Investment Thesis</div>
+              <div className="space-y-2">
+                {thesis.map((item, i) => (
+                  <div key={i} className="flex items-start gap-2 p-2 rounded-lg hover:bg-emerald-500/5 transition-colors">
+                    <span className="text-emerald-500 mt-0.5 text-xs shrink-0">+</span>
+                    <div className="flex-1">
+                      <p className="text-xs text-zinc-300 leading-relaxed">{item.claim}</p>
+                      <div className="flex gap-1 mt-1">
+                        {item.evidence_ids.map((eid) => (
+                          <span key={eid} className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400/70">
+                            {eid}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Key Risks */}
+          {risks && risks.length > 0 && (
+            <div className="rounded-xl border border-red-500/20 bg-red-950/10 p-4">
+              <div className="text-[10px] font-bold text-red-500 uppercase tracking-wider mb-3">Key Risks</div>
+              <div className="space-y-2">
+                {risks.map((item, i) => (
+                  <div key={i} className="flex items-start gap-2 p-2 rounded-lg hover:bg-red-500/5 transition-colors">
+                    <span className="text-red-500 mt-0.5 text-xs shrink-0">!</span>
+                    <div className="flex-1">
+                      <p className="text-xs text-zinc-300 leading-relaxed">{item.claim}</p>
+                      <div className="flex gap-1 mt-1">
+                        {item.evidence_ids.map((eid) => (
+                          <span key={eid} className="text-[9px] px-1.5 py-0.5 rounded bg-red-500/10 text-red-400/70">
+                            {eid}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

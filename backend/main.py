@@ -79,7 +79,8 @@ def get_mock_events(company: str) -> list[dict]:
                   "output": {"youtube_url": "https://www.youtube.com/watch?v=eaeBSWsd8mU", "label": "Q2 FY2026 Earnings Presentation (video)",
                              "qa_pdf_url": "https://aktsk.jp/ir/library/pdf/qa_summary_q2_fy2026.pdf",
                              "qa_pdf_title": "2026年3月期 第2四半期 Q&Aサマリー",
-                             "qa_pdf_preview": "Q1: 怪獣8号ゲームの今後の海外展開計画について教えてください。\nA1: 現在、北米・欧州・アジア太平洋地域で展開中です。FY2026通期で累計売上高50億円を目標としております。特にアニメ第2期との連動施策を計画しております。\n\nQ2: AI-DXソリューション事業の収益見通しは？\nA2: FY2026通期で売上高10億円を見込んでおります。主力はエンタメ企業向けAI開発支援と、自社IP活用のAIサービスです。\n\nQ3: パパブブレ買収のシナジーについて\nA3: IP×リアル体験の創出を進めています。怪獣8号コラボキャンディが好評で、ポップアップストアでの販売が想定を上回っております。\n\nQ4: 株主還元方針について\nA4: DOE4%を基準とし、中間配当55円を実施いたしました。通期では110円を見込んでおります。"},
+                             "qa_pdf_preview": "Q1: 怪獣8号ゲームの今後の海外展開計画について教えてください。\nA1: 現在、北米・欧州・アジア太平洋地域で展開中です。FY2026通期で累計売上高50億円を目標としております。特にアニメ第2期との連動施策を計画しております。\n\nQ2: AI-DXソリューション事業の収益見通しは？\nA2: FY2026通期で売上高10億円を見込んでおります。主力はエンタメ企業向けAI開発支援と、自社IP活用のAIサービスです。\n\nQ3: パパブブレ買収のシナジーについて\nA3: IP×リアル体験の創出を進めています。怪獣8号コラボキャンディが好評で、ポップアップストアでの販売が想定を上回っております。\n\nQ4: 株主還元方針について\nA4: DOE4%を基準とし、中間配当55円を実施いたしました。通期では110円を見込んでおります。",
+                             "qa_pdf_preview_en": "Q1: Please tell us about future overseas expansion plans for the Kaiju No.8 game.\nA1: We are currently expanding in North America, Europe, and Asia-Pacific. Our target is cumulative revenue of JPY 5B for full-year FY2026. We are planning promotional campaigns tied to the anime Season 2.\n\nQ2: What is the revenue outlook for the AI-DX Solutions business?\nA2: We project revenue of JPY 1B for full-year FY2026. Our core offerings are AI development support for entertainment companies and AI services leveraging our own IP.\n\nQ3: What synergies do you expect from the Papabubble acquisition?\nA3: We are creating IP x real-world experiences. The Kaiju No.8 collaboration candy has been well-received, with pop-up store sales exceeding our expectations.\n\nQ4: What is your shareholder return policy?\nA4: Using DOE 4% as our benchmark, we paid an interim dividend of JPY 55/share. We project JPY 110/share for the full year."},
                   "evidence_id": "ev-co-0"}},
 
         {"agent": "company", "status": "running", "message": "Video downloaded (28:14). Running Whisper transcription...",
@@ -127,7 +128,8 @@ def get_mock_events(company: str) -> list[dict]:
                   "status": "completed",
                   "output": {"duration_min": 28, "speakers_identified": 1, "speaker": "取締役副社長 石倉一紘", "transcript_tokens": 42850,
                              "key_topics": ["segment change", "M&A strategy", "Kaiju No.8 game launch"],
-                             "transcript_preview": "皆様、本日はお忙しい中、2026年3月期第2四半期の決算説明会にご参加いただき誠にありがとうございます。取締役副社長の石倉でございます。\n\nまず業績のハイライトからご説明いたします。売上高は76億2百万円、営業利益は34億22百万円となりました。\n\n特に注目すべきは、怪獣8号ゲームの好調な立ち上がりです。リリース初月で売上高20億円を突破し、海外比率は40%に達しております。これはアニメ連動型のライブオペレーション戦略が奏功した結果です。\n\nまた、事業セグメントの再編について発表いたします。従来のゲーム事業を中心とした体制から、Game/Comic事業、エンターテインメント・ライフスタイル事業、AI-DXソリューション事業の3セグメント体制へ移行いたします。\n\nM&A戦略については、パパブブレを含む2件の買収を完了し、IP×リアル領域でのシナジー創出を進めております。"},
+                             "transcript_preview": "皆様、本日はお忙しい中、2026年3月期第2四半期の決算説明会にご参加いただき誠にありがとうございます。取締役副社長の石倉でございます。\n\nまず業績のハイライトからご説明いたします。売上高は76億2百万円、営業利益は34億22百万円となりました。\n\n特に注目すべきは、怪獣8号ゲームの好調な立ち上がりです。リリース初月で売上高20億円を突破し、海外比率は40%に達しております。これはアニメ連動型のライブオペレーション戦略が奏功した結果です。\n\nまた、事業セグメントの再編について発表いたします。従来のゲーム事業を中心とした体制から、Game/Comic事業、エンターテインメント・ライフスタイル事業、AI-DXソリューション事業の3セグメント体制へ移行いたします。\n\nM&A戦略については、パパブブレを含む2件の買収を完了し、IP×リアル領域でのシナジー創出を進めております。",
+                             "transcript_preview_en": "Thank you all for joining today's Q2 FY2026 earnings presentation despite your busy schedules. I am Ishikura, Executive Vice President.\n\nLet me begin with the performance highlights. Revenue was JPY 7,602M and operating income was JPY 3,422M.\n\nOf particular note is the strong launch of the Kaiju No.8 game. It surpassed JPY 2B in revenue in its first month, with overseas accounting for 40%. This is the result of our anime-linked live operations strategy.\n\nWe are also announcing a restructuring of our business segments. We will transition from a game-centric structure to a 3-segment structure: Game/Comic, Entertainment/Lifestyle, and AI-DX Solutions.\n\nRegarding our M&A strategy, we have completed 2 acquisitions including Papabubble and are pursuing synergy creation in the IP x real-world domain."},
                   "evidence_id": "ev-co-2"}},
 
         {"agent": "company", "status": "running", "message": "Management tone: Confident. Key: 'Revenue and profit growth expected for FY2026'",
@@ -180,75 +182,114 @@ def get_mock_events(company: str) -> list[dict]:
         {"agent": "orchestrator", "status": "running", "message": "Cross-referencing evidence across 4 data sources...", "phase": "synthesize", "delay": 1.0},
         {"agent": "orchestrator", "status": "completed", "message": "Evidence package compiled. Initiating adversarial debate...", "phase": "synthesize", "delay": 0.5},
 
-        # ══════════════════════════════════════════════════════════
-        # ── Phase 7: ADVERSARIAL DEBATE — Bull vs Bear + Judge ──
-        # ══════════════════════════════════════════════════════════
+        # ══════════════════════════════════════════════════════════════
+        # ── Phase 7: ADVERSARIAL DEBATE — 10 Rounds, Bull vs Bear ──
+        # ══════════════════════════════════════════════════════════════
 
-        {"agent": "judge", "status": "running", "message": "Debate session opened. Bull and Bear agents, present your cases.", "phase": "debate", "debate_round": 0, "delay": 0.8,
-         "argument": {"position": "judge", "round": 0, "text": "I will evaluate the investment case for Akatsuki Inc. (3932.T). Bull, you may begin.", "ruling": "continue"}},
+        # ── Round 1: IP Monetization ──
+        {"agent": "bull", "status": "running", "message": "Kaiju No.8 proves the IP monetization engine works — JPY 2B+ in month one, 40% overseas", "phase": "debate", "debate_round": 1, "delay": 0.7,
+         "argument": {"position": "bull", "round": 1, "text": "Kaiju No.8: JPY 2B+ revenue in month one, 40% from overseas markets. This IP monetization engine is PROVEN at global scale.", "evidence_ids": ["ev-co-3", "ev-ir-2"], "strength": 0.85}},
 
-        # ── Round 1 ──
-        {"agent": "bull", "status": "running", "message": "Kaiju No.8 proves the IP monetization engine works — JPY 2B+ in month one, 40% overseas", "phase": "debate", "debate_round": 1, "delay": 1.0,
-         "argument": {"position": "bull", "round": 1, "text": "Kaiju No.8: JPY 2B+ in month one, 40% overseas. This IP engine is PROVEN.", "evidence_ids": ["ev-co-3", "ev-ir-2"], "strength": 0.85}},
+        {"agent": "bear", "status": "running", "message": "One hit game does not make a sustainable business", "phase": "debate", "debate_round": 1, "delay": 0.7,
+         "argument": {"position": "bear", "round": 1, "text": "One hit title? Classic single-game dependency. Legacy titles declining YoY. Dragon Ball Z Dokkan Battle is aging. This is a one-trick pony.", "evidence_ids": ["ev-ir-2", "ev-ir-3"], "strength": 0.72}},
 
-        {"agent": "bear", "status": "running", "message": "One hit game does not make a sustainable business", "phase": "debate", "debate_round": 1, "delay": 1.0,
-         "argument": {"position": "bear", "round": 1, "text": "One hit title? Classic single-game dependency. Legacy titles declining YoY. Papabubble acquisition = distraction.", "evidence_ids": ["ev-ir-2", "ev-ir-3"], "strength": 0.72}},
+        # ── Round 2: Diversification ──
+        {"agent": "bull", "status": "running", "message": "3-segment restructuring directly addresses concentration risk", "phase": "debate", "debate_round": 2, "delay": 0.7,
+         "argument": {"position": "bull", "round": 2, "text": "The 3-segment pivot is the ANSWER to concentration risk. Game/Comic + Ent/Lifestyle + AI-DX = strategic diversification.", "evidence_ids": ["ev-ir-3", "ev-co-2"], "strength": 0.78}},
 
-        {"agent": "judge", "status": "running", "message": "Both points noted.", "phase": "debate", "debate_round": 1, "delay": 0.6,
-         "argument": {"position": "judge", "round": 1, "text": "Bull's IP thesis is data-backed. Bear raises valid concentration risk.", "ruling": "continue"}},
+        {"agent": "bear", "status": "running", "message": "Three simultaneous strategic shifts = execution risk", "phase": "debate", "debate_round": 2, "delay": 0.7,
+         "argument": {"position": "bear", "round": 2, "text": "Three simultaneous pivots? AI-DX unproven. Papabubble = CANDY. Two M&A integrations in H2. Management is spreading dangerously thin.", "evidence_ids": ["ev-ir-3", "ev-co-3"], "strength": 0.80}},
 
-        # ── Round 2 ──
-        {"agent": "bull", "status": "running", "message": "The 3-segment pivot IS the answer to concentration risk — plus satellite confirms physical expansion", "phase": "debate", "debate_round": 2, "delay": 1.0,
-         "argument": {"position": "bull", "round": 2, "text": "3 new segments = diversified. Satellite confirms HQ expansion + 3,200/day at pop-ups. You can't fake satellite data.", "evidence_ids": ["ev-ir-3", "ev-sat-2", "ev-sat-3"], "strength": 0.88}},
+        # ── Round 3: Alternative Data ──
+        {"agent": "bull", "status": "running", "message": "Satellite data independently confirms physical expansion — you can't fake this", "phase": "debate", "debate_round": 3, "delay": 0.7,
+         "argument": {"position": "bull", "round": 3, "text": "Satellite imagery confirms HQ expansion + new signage on adjacent building. 3,200 visitors/day at Kaiju No.8 pop-ups. This is UNFAKEABLE alternative data.", "evidence_ids": ["ev-sat-2", "ev-sat-3"], "strength": 0.88}},
 
-        {"agent": "bear", "status": "running", "message": "Three simultaneous strategic shifts = execution risk", "phase": "debate", "debate_round": 2, "delay": 1.0,
-         "argument": {"position": "bear", "round": 2, "text": "AI-DX unproven. Papabubble = candy?! 2 M&A integrations in H2. Management spreading too thin.", "evidence_ids": ["ev-ir-3", "ev-co-3"], "strength": 0.68}},
+        {"agent": "bear", "status": "running", "message": "Foot traffic doesn't prove unit economics", "phase": "debate", "debate_round": 3, "delay": 0.7,
+         "argument": {"position": "bear", "round": 3, "text": "Foot traffic at pop-ups doesn't prove unit economics. Pop-up stores are marketing spend, not revenue drivers. Show me the margin data.", "evidence_ids": ["ev-sat-3"], "strength": 0.65}},
 
-        {"agent": "judge", "status": "running", "message": "Satellite evidence is compelling.", "phase": "debate", "debate_round": 2, "delay": 0.6,
-         "argument": {"position": "judge", "round": 2, "text": "Satellite data can't be manipulated. But execution risk is real. Final round.", "ruling": "continue"}},
+        # ── Round 4: Valuation ──
+        {"agent": "bull", "status": "running", "message": "P/E still below entertainment sector average", "phase": "debate", "debate_round": 4, "delay": 0.7,
+         "argument": {"position": "bull", "round": 4, "text": "At JPY 2,420, P/E is still 15x — below the entertainment sector average of 22x. There's significant room for multiple expansion.", "evidence_ids": ["ev-ir-2"], "strength": 0.75}},
 
-        # ── Round 3 (Final) ──
-        {"agent": "bull", "status": "running", "message": "19 VC exits, DOE raised to 4%, METI tailwind, convergent evidence across ALL 4 data sources", "phase": "debate", "debate_round": 3, "delay": 1.0,
-         "argument": {"position": "bull", "round": 3, "text": "4 data sources converge. 19 VC exits, 4 IPOs. DOE 4%. METI JPY 500B tailwind. Conviction: 0.81.", "evidence_ids": ["ev-ir-2", "ev-nw-2", "ev-co-3", "ev-nw-3"], "strength": 0.90}},
+        {"agent": "bear", "status": "running", "message": "Market already priced in Kaiju No.8 success", "phase": "debate", "debate_round": 4, "delay": 0.7,
+         "argument": {"position": "bear", "round": 4, "text": "Stock up 36% in 6 months. Market ALREADY priced in Kaiju No.8. If the game decays at typical mobile rates (30% M/M), the narrative collapses entirely.", "evidence_ids": ["ev-co-3", "ev-ir-2"], "strength": 0.82}},
 
-        {"agent": "bear", "status": "running", "message": "Valuation already prices in growth", "phase": "debate", "debate_round": 3, "delay": 1.0,
-         "argument": {"position": "bear", "round": 3, "text": "Market already priced in. If Kaiju No.8 decays at typical mobile rates, narrative collapses. HOLD at best.", "evidence_ids": ["ev-co-3", "ev-nw-3", "ev-ir-2"], "strength": 0.60}},
+        # ── Round 5: Capital Allocation ──
+        {"agent": "bull", "status": "running", "message": "19 VC exits with 4 IPOs in 2 years — best-in-class capital allocation", "phase": "debate", "debate_round": 5, "delay": 0.7,
+         "argument": {"position": "bull", "round": 5, "text": "19 cumulative VC exits including 4 IPOs in just 2 years. This is best-in-class capital allocation. The VC portfolio ALONE justifies a premium.", "evidence_ids": ["ev-ir-2", "ev-nw-3"], "strength": 0.83}},
 
-        {"agent": "judge", "status": "running", "message": "Deliberating...", "phase": "debate", "debate_round": 3, "delay": 1.5,
-         "argument": {"position": "judge", "round": 3, "text": "Reviewing all evidence...", "ruling": "deliberating"}},
+        {"agent": "bear", "status": "running", "message": "VC exits are one-time gains, not recurring revenue", "phase": "debate", "debate_round": 5, "delay": 0.7,
+         "argument": {"position": "bear", "round": 5, "text": "VC exits are one-time gains — JPY 1.8B in H1 is non-recurring. Strip out investment exits and core operating margins tell a different story.", "evidence_ids": ["ev-ir-2", "ev-ir-1"], "strength": 0.70}},
 
-        # ── Phase 8: Judge's Verdict ──
-        {"agent": "judge", "status": "completed", "message": "VERDICT: BUY — Bull's multi-source convergent evidence outweighs Bear's execution risk concerns", "phase": "verdict", "debate_round": 3, "delay": 1.0,
-         "argument": {"position": "judge", "round": 3, "ruling": "verdict"},
+        # ── Round 6: M&A Integration ──
+        {"agent": "bull", "status": "running", "message": "Papabubble IP x retail synergy is already producing results", "phase": "debate", "debate_round": 6, "delay": 0.7,
+         "argument": {"position": "bull", "round": 6, "text": "Papabubble synergy is WORKING. Kaiju No.8 collab candy sold out in 3 days. IP x retail is a new revenue vector that competitors can't replicate.", "evidence_ids": ["ev-co-3", "ev-sat-3"], "strength": 0.72}},
+
+        {"agent": "bear", "status": "running", "message": "Candy is not a tech moat — this is a gaming company buying a candy shop", "phase": "debate", "debate_round": 6, "delay": 0.7,
+         "argument": {"position": "bear", "round": 6, "text": "A gaming company buying a CANDY SHOP. This is strategy drift, pure and simple. Dual M&A integration will drain management focus from core gaming.", "evidence_ids": ["ev-ir-3", "ev-co-3"], "strength": 0.78}},
+
+        # ── Round 7: Policy Tailwind ──
+        {"agent": "bull", "status": "running", "message": "METI JPY 500B content export target = direct government tailwind", "phase": "debate", "debate_round": 7, "delay": 0.7,
+         "argument": {"position": "bull", "round": 7, "text": "METI's JPY 500B content export policy + Digital Agency AI promotion = dual government tailwind. Akatsuki is positioned at the intersection of BOTH policies.", "evidence_ids": ["ev-nw-2", "ev-nw-1"], "strength": 0.86}},
+
+        {"agent": "bear", "status": "running", "message": "Government policy targets the industry, not specific companies", "phase": "debate", "debate_round": 7, "delay": 0.7,
+         "argument": {"position": "bear", "round": 7, "text": "METI targets the industry broadly — every competitor benefits equally. Government policy is not a company-specific moat. Bandai Namco benefits MORE.", "evidence_ids": ["ev-nw-2"], "strength": 0.62}},
+
+        # ── Round 8: Macro Risk ──
+        {"agent": "bull", "status": "running", "message": "BOJ hold at 0.5% supports M&A strategy with low cost of capital", "phase": "debate", "debate_round": 8, "delay": 0.7,
+         "argument": {"position": "bull", "round": 8, "text": "BOJ holding at 0.5% keeps cost of capital low. Perfect environment for the M&A-driven growth strategy. IPO market is healthy for VC exits.", "evidence_ids": ["ev-nw-3"], "strength": 0.80}},
+
+        {"agent": "bear", "status": "running", "message": "Rate hike risk could compress growth multiples", "phase": "debate", "debate_round": 8, "delay": 0.7,
+         "argument": {"position": "bear", "round": 8, "text": "BOJ has signaled potential rate hikes in H2 2026. A move to 0.75% would compress growth multiples across the entertainment sector. M&A financing costs rise.", "evidence_ids": ["ev-nw-3", "ev-nw-1"], "strength": 0.75}},
+
+        # ── Round 9: Management Quality ──
+        {"agent": "bull", "status": "running", "message": "CFO Ishikura's tone analysis shows high confidence with data-backed guidance", "phase": "debate", "debate_round": 9, "delay": 0.7,
+         "argument": {"position": "bull", "round": 9, "text": "AI sentiment analysis of CFO Ishikura: 81% confidence score. Revenue AND profit growth guidance maintained. This isn't hype — it's data-backed conviction.", "evidence_ids": ["ev-co-3", "ev-co-2"], "strength": 0.90}},
+
+        {"agent": "bear", "status": "running", "message": "Management optimism is not the same as execution certainty", "phase": "debate", "debate_round": 9, "delay": 0.7,
+         "argument": {"position": "bear", "round": 9, "text": "Management ALWAYS sounds confident in earnings calls. Sentiment analysis can't predict execution. Show me 2 consecutive quarters of segment growth first.", "evidence_ids": ["ev-co-2", "ev-co-3"], "strength": 0.58}},
+
+        # ── Round 10: Final — Evidence Convergence ──
+        {"agent": "bull", "status": "running", "message": "FINAL: 4 independent data sources ALL converge on the growth thesis", "phase": "debate", "debate_round": 10, "delay": 0.7,
+         "argument": {"position": "bull", "round": 10, "text": "4 independent data sources converge: EDINET filings confirm 45% margins. Whisper transcript confirms guidance. METI policy confirms tailwind. Satellite confirms physical expansion. This level of convergence is RARE.", "evidence_ids": ["ev-ir-2", "ev-co-3", "ev-nw-2", "ev-sat-2"], "strength": 0.92}},
+
+        {"agent": "bear", "status": "running", "message": "Correlation across sources does not eliminate systematic risk", "phase": "debate", "debate_round": 10, "delay": 0.7,
+         "argument": {"position": "bear", "round": 10, "text": "Source convergence doesn't eliminate systematic risk. A single macro shock — yen spike, China gaming ban, or App Store fee hike — undermines ALL sources simultaneously. Correlation is not causation.", "evidence_ids": ["ev-nw-3", "ev-nw-1", "ev-ir-2"], "strength": 0.55}},
+
+        # ── Phase 8: Automated Verdict (no judge, system-generated) ──
+        {"agent": "orchestrator", "status": "completed", "message": "VERDICT: BUY — Bull prevails 7-3 across 10 rounds with convergent multi-source evidence", "phase": "verdict", "debate_round": 10, "delay": 1.0,
+         "argument": {"position": "bull", "round": 10, "ruling": "verdict"},
          "judgment": {
              "signal": "BUY",
              "confidence": 74,
              "thesis": [
-                 {"claim": "Kaiju No.8 validates IP monetization at scale (JPY 2B+, 40% overseas) — Bull's core thesis is well-evidenced",
+                 {"claim": "Kaiju No.8 validates IP monetization at scale (JPY 2B+, 40% overseas) — proven global revenue engine",
                   "evidence_ids": ["ev-co-3", "ev-ir-2"]},
-                 {"claim": "3-segment restructuring provides strategic diversification, though execution remains to be proven",
+                 {"claim": "3-segment restructuring provides strategic diversification into Game/Comic, Ent/Lifestyle, and AI-DX",
                   "evidence_ids": ["ev-ir-3", "ev-co-2"]},
-                 {"claim": "Satellite data independently confirms physical expansion signals — this alternative data cannot be manipulated through traditional channels",
+                 {"claim": "Satellite data independently confirms physical expansion — unfakeable alternative data signal",
                   "evidence_ids": ["ev-sat-2", "ev-sat-3"]},
-                 {"claim": "19 VC exits (4 IPOs in 2 years) demonstrate strong capital allocation track record",
+                 {"claim": "19 VC exits (4 IPOs in 2 years) demonstrate best-in-class capital allocation",
                   "evidence_ids": ["ev-ir-2", "ev-nw-3"]},
-                 {"claim": "METI content export policy (JPY 500B) provides macro tailwind for IP-driven business model",
+                 {"claim": "Dual government tailwind: METI JPY 500B content export + Digital Agency AI promotion",
                   "evidence_ids": ["ev-nw-2", "ev-nw-1"]},
              ],
              "risks": [
-                 {"claim": "Bear correctly identifies single-title concentration risk — monitor Kaiju No.8 revenue retention closely",
+                 {"claim": "Single-title concentration: Kaiju No.8 mobile decay rate is the key monitoring metric",
                   "evidence_ids": ["ev-ir-2", "ev-co-3"]},
-                 {"claim": "M&A integration of 2 acquisitions in H2 represents execution risk — Bear's point on management bandwidth is valid",
+                 {"claim": "Dual M&A integration (Papabubble + 1 other) creates execution risk and management bandwidth concern",
                   "evidence_ids": ["ev-ir-3", "ev-co-3"]},
-                 {"claim": "BOJ rate environment uncertainty — Bear's macro concern noted for monitoring",
+                 {"claim": "BOJ rate hike risk in H2 2026 could compress growth multiples and increase M&A financing costs",
                   "evidence_ids": ["ev-nw-3"]},
+                 {"claim": "Valuation already reflects 36% rally — limited margin of safety at current levels",
+                  "evidence_ids": ["ev-co-3", "ev-ir-2"]},
              ],
-             "summary": f"After adversarial debate, I rule in favor of BULL with a BUY signal at 74% confidence. The confidence is tempered from the initial 79% due to Bear's valid points on execution risk and single-title dependency. However, the convergent evidence across 4 independent data sources — EDINET filings, Whisper-transcribed earnings calls, government policy analysis, and satellite imagery — provides a level of conviction that single-source analysis cannot achieve. The satellite data independently confirming physical expansion is particularly compelling as it represents alternative data that cannot be manipulated. Bear's concerns about M&A integration and Kaiju No.8 revenue sustainability are incorporated as key monitoring items.",
+             "summary": "After 10 rounds of adversarial debate, Bull prevails 7-3 with a BUY signal at 74% confidence. The convergent evidence across 4 independent data sources — EDINET filings, Whisper-transcribed earnings calls, government policy analysis, and satellite imagery — provides conviction that single-source analysis cannot achieve. Bear mounted strong challenges on valuation (Round 4), M&A integration risk (Round 6), and execution uncertainty (Round 2), but could not counter the satellite-confirmed physical expansion signals or the multi-source evidence convergence in the final rounds.",
              "debate_summary": {
-                 "rounds": 3,
-                 "bull_score": "Strong (convergent multi-source evidence, satellite confirmation)",
-                 "bear_score": "Moderate (valid execution risk, but weakened by lack of counter-evidence to satellite data)",
-                 "verdict_basis": "Multi-source evidence convergence outweighs execution risk concerns",
+                 "rounds": 10,
+                 "bull_score": "7/10 rounds won — dominant in alternative data, policy, and evidence convergence",
+                 "bear_score": "3/10 rounds won — strongest on valuation, M&A risk, and execution concerns",
+                 "verdict_basis": "Multi-source evidence convergence across 4 independent data sources",
              },
              "alpha": {
                  "expected_return": 82,
@@ -266,8 +307,8 @@ def get_mock_events(company: str) -> list[dict]:
                  "factors": [
                      {"factor": "Single-title concentration: Kaiju No.8 revenue decay risk", "severity": 0.75, "evidence_ids": ["ev-ir-2", "ev-co-3"]},
                      {"factor": "Dual M&A integration in H2 — management bandwidth", "severity": 0.60, "evidence_ids": ["ev-ir-3", "ev-co-3"]},
-                     {"factor": "BOJ rate uncertainty — may impact M&A financing", "severity": 0.35, "evidence_ids": ["ev-nw-3"]},
-                     {"factor": "Valuation already reflects growth expectations", "severity": 0.45, "evidence_ids": ["ev-co-3", "ev-ir-2"]},
+                     {"factor": "BOJ rate hike risk — may compress growth multiples", "severity": 0.45, "evidence_ids": ["ev-nw-3"]},
+                     {"factor": "Valuation already reflects 36% rally, limited margin of safety", "severity": 0.50, "evidence_ids": ["ev-co-3", "ev-ir-2"]},
                  ],
              },
          }},

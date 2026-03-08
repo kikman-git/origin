@@ -134,13 +134,38 @@ function VideoCard({ source }: { source: ToolTrace }) {
   );
 }
 
+// ── Translation Toggle ──
+function LangToggle({ showOriginal, onToggle }: { showOriginal: boolean; onToggle: () => void }) {
+  return (
+    <button
+      onClick={onToggle}
+      className="flex items-center gap-1.5 text-[8px] px-2 py-0.5 rounded-full border transition-all cursor-pointer select-none"
+      style={{
+        borderColor: showOriginal ? "#a855f740" : "#10b98140",
+        backgroundColor: showOriginal ? "#a855f710" : "#10b98110",
+        color: showOriginal ? "#c084fc" : "#34d399",
+      }}
+    >
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+        <path d="M5 8l6 6M4 14l6-6 2-3M2 5h12M7 2h1" />
+        <path d="M14 14l3 6 3-6M15 17h4" />
+      </svg>
+      {showOriginal ? "原文 JA" : "AI Translated EN"}
+    </button>
+  );
+}
+
 // ── Transcript Card ──
 function TranscriptCard({ source }: { source: ToolTrace }) {
+  const [showOriginal, setShowOriginal] = useState(false);
   const o = source.output || {};
   const preview = (o.transcript_preview as string) || "";
+  const previewEn = (o.transcript_preview_en as string) || "";
   const speaker = (o.speaker as string) || "";
   const tokens = (o.transcript_tokens as number) || 0;
   const topics = (o.key_topics as string[]) || [];
+  const hasTranslation = !!previewEn;
+  const displayText = hasTranslation && !showOriginal ? previewEn : preview;
 
   return (
     <div className="h-full flex flex-col">
@@ -160,18 +185,19 @@ function TranscriptCard({ source }: { source: ToolTrace }) {
           );
         })}
       </div>
-      {/* Speaker */}
+      {/* Speaker + lang toggle */}
       <div className="flex items-center gap-2 mb-2">
         <div className="w-5 h-5 rounded-full bg-purple-600/30 border border-purple-500/40 flex items-center justify-center text-[8px] text-purple-400">
           IS
         </div>
         <span className="text-[10px] text-purple-300 font-medium">{speaker}</span>
+        {hasTranslation && <LangToggle showOriginal={showOriginal} onToggle={() => setShowOriginal(!showOriginal)} />}
         <span className="text-[9px] text-zinc-600 ml-auto">{tokens.toLocaleString()} tokens</span>
       </div>
       {/* Transcript text */}
       <div className="flex-1 overflow-y-auto max-h-[160px] rounded-lg bg-zinc-900/50 p-3 border border-purple-500/10">
         <p className="text-[10px] text-zinc-300 leading-relaxed whitespace-pre-wrap font-sans">
-          {preview || "Transcript loading..."}
+          {displayText || "Transcript loading..."}
         </p>
       </div>
       {/* Topics */}
@@ -260,9 +286,13 @@ function FinancialCard({ source }: { source: ToolTrace }) {
 
 // ── PDF / Q&A Card ──
 function PDFCard({ source }: { source: ToolTrace }) {
+  const [showOriginal, setShowOriginal] = useState(false);
   const o = source.output || {};
   const title = (o.qa_pdf_title as string) || (o.label as string) || "Document";
   const preview = (o.qa_pdf_preview as string) || "";
+  const previewEn = (o.qa_pdf_preview_en as string) || "";
+  const hasTranslation = !!previewEn;
+  const displayText = hasTranslation && !showOriginal ? previewEn : preview;
 
   return (
     <div className="h-full flex flex-col">
@@ -273,13 +303,14 @@ function PDFCard({ source }: { source: ToolTrace }) {
           <polyline points="14 2 14 8 20 8" />
         </svg>
         <span className="text-[10px] text-zinc-300 font-medium truncate flex-1">{title}</span>
+        {hasTranslation && <LangToggle showOriginal={showOriginal} onToggle={() => setShowOriginal(!showOriginal)} />}
         <span className="text-[8px] text-red-400 bg-red-500/10 px-1.5 py-0.5 rounded border border-red-500/20">PDF</span>
       </div>
       {/* Simulated PDF content */}
       <div className="flex-1 bg-zinc-950/50 rounded-b-lg p-3 overflow-y-auto max-h-[200px]">
-        {preview ? (
+        {displayText ? (
           <div className="space-y-2">
-            {preview.split("\n\n").map((block, i) => (
+            {displayText.split("\n\n").map((block, i) => (
               <div key={i} className="text-[9px] leading-relaxed">
                 {block.split("\n").map((line, j) => {
                   const isQ = line.startsWith("Q");

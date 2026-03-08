@@ -1,14 +1,11 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useState, useRef, useCallback, useEffect } from "react";
 import AgentGraph from "./components/AgentGraph";
 import DebatePanel from "./components/DebatePanel";
 import LogPanel from "./components/LogPanel";
 import DataSourcesPanel from "./components/DataSourcesPanel";
 import PredictionDashboard from "./components/PredictionDashboard";
-
-const Verdict3D = dynamic(() => import("./components/Verdict3D"), { ssr: false });
 
 export type ToolTrace = {
   name: string;
@@ -82,8 +79,9 @@ const AGENT_CONFIG: Record<string, string> = {
   satellite: "Satellite Agent",
   bull: "Bull Agent",
   bear: "Bear Agent",
-  judge: "Judge",
 };
+
+type ViewTab = "analysis" | "dashboard";
 
 export default function Home() {
   const [company, setCompany] = useState("");
@@ -93,6 +91,7 @@ export default function Home() {
   const [judgment, setJudgment] = useState<AgentEvent["judgment"] | null>(null);
   const [highlightedEvidence, setHighlightedEvidence] = useState<string[]>([]);
   const [debateEvents, setDebateEvents] = useState<AgentEvent[]>([]);
+  const [activeTab, setActiveTab] = useState<ViewTab>("analysis");
   const abortRef = useRef<AbortController | null>(null);
   const scrollAnchorRef = useRef<HTMLDivElement>(null);
   const userScrolledUp = useRef(false);
@@ -118,6 +117,11 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, [logs.length, debateEvents.length, judgment, isRunning]);
 
+  // Auto-switch to dashboard when judgment arrives
+  useEffect(() => {
+    if (judgment) setActiveTab("dashboard");
+  }, [judgment]);
+
   const initAgents = useCallback(() => {
     const initial: Record<string, AgentState> = {};
     for (const [id, label] of Object.entries(AGENT_CONFIG)) {
@@ -136,6 +140,7 @@ export default function Home() {
     setLogs([]);
     setDebateEvents([]);
     setHighlightedEvidence([]);
+    setActiveTab("analysis");
     userScrolledUp.current = false;
     const agentStates = initAgents();
     setAgents(agentStates);
@@ -206,6 +211,8 @@ export default function Home() {
     }
   }, [company, isRunning, initAgents]);
 
+  const hasStarted = Object.keys(agents).length > 0;
+
   return (
     <div className="min-h-screen bg-[#050510] text-zinc-200">
       {/* Header */}
@@ -219,8 +226,45 @@ export default function Home() {
               JapanAlpha<span className="text-zinc-600 font-normal ml-2 text-sm">AI Hedge Fund</span>
             </h1>
           </div>
+
+          {/* Tab switcher in header when analysis is active */}
+          {hasStarted && (
+            <div className="flex items-center gap-1 bg-zinc-900/80 rounded-lg p-1 border border-zinc-800/50">
+              <button
+                onClick={() => setActiveTab("analysis")}
+                className={`text-xs px-4 py-1.5 rounded-md font-medium transition-all ${
+                  activeTab === "analysis"
+                    ? "bg-zinc-700/80 text-zinc-100"
+                    : "text-zinc-500 hover:text-zinc-300"
+                }`}
+              >
+                AI Analysis
+              </button>
+              <button
+                onClick={() => setActiveTab("dashboard")}
+                disabled={!judgment}
+                className={`text-xs px-4 py-1.5 rounded-md font-medium transition-all ${
+                  activeTab === "dashboard"
+                    ? "bg-emerald-600/80 text-white"
+                    : judgment
+                      ? "text-zinc-500 hover:text-zinc-300"
+                      : "text-zinc-700 cursor-not-allowed"
+                }`}
+              >
+                Dashboard
+                {judgment && (
+                  <span className={`ml-1.5 text-[9px] px-1.5 py-0.5 rounded font-bold ${
+                    judgment.signal === "BUY" ? "bg-emerald-500/20 text-emerald-400" : "bg-red-500/20 text-red-400"
+                  }`}>
+                    {judgment.signal}
+                  </span>
+                )}
+              </button>
+            </div>
+          )}
+
           <div className="flex items-center gap-2 text-xs text-zinc-500">
-            <span className="inline-block h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" />
             System Online
           </div>
         </div>
@@ -252,40 +296,45 @@ export default function Home() {
 
       {/* Main Content */}
       <div className="mx-auto max-w-[1400px] px-6 py-6">
-        {Object.keys(agents).length === 0 ? (
+        {!hasStarted ? (
           <div className="flex flex-col items-center justify-center py-32 text-zinc-500">
             <div className="text-7xl mb-6 opacity-20">&#x1F50D;</div>
             <p className="text-lg font-medium text-zinc-400">Enter a company name to start agent analysis</p>
-            <p className="text-sm mt-2 text-zinc-600">8 AI agents will collect and debate in real-time</p>
+            <p className="text-sm mt-2 text-zinc-600">AI agents will collect, analyze and debate in real-time</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            {/* Left: Agent Flow + Sources + Debate + Verdict + Dashboard — 3 cols */}
+            {/* Main content area — 3 cols */}
             <div className="lg:col-span-3 space-y-4">
-              <AgentGraph agents={agents} highlightedEvidence={highlightedEvidence} />
-
-              {allTools.some((t) => t.status === "completed" && t.evidence_id) && (
-                <DataSourcesPanel tools={allTools} />
-              )}
-
-              {debateEvents.length > 0 && (
-                <DebatePanel
-                  events={debateEvents}
-                  highlightedEvidence={highlightedEvidence}
-                  onEvidenceHover={setHighlightedEvidence}
-                />
-              )}
-
-              {judgment && (
+              {activeTab === "analysis" ? (
                 <>
-                  <Verdict3D signal={judgment.signal} confidence={judgment.confidence} />
+                  <AgentGraph agents={agents} highlightedEvidence={highlightedEvidence} debateEvents={debateEvents} />
+
+                  {allTools.some((t) => t.status === "completed" && t.evidence_id) && (
+                    <DataSourcesPanel tools={allTools} />
+                  )}
+
+                  {debateEvents.length > 0 && (
+                    <DebatePanel
+                      events={debateEvents}
+                      highlightedEvidence={highlightedEvidence}
+                      onEvidenceHover={setHighlightedEvidence}
+                    />
+                  )}
+                </>
+              ) : (
+                judgment && (
                   <PredictionDashboard
                     signal={judgment.signal}
                     confidence={judgment.confidence}
                     alpha={judgment.alpha}
                     beta={judgment.beta}
+                    thesis={judgment.thesis}
+                    risks={judgment.risks}
+                    summary={judgment.summary}
+                    debateSummary={judgment.debate_summary}
                   />
-                </>
+                )
               )}
             </div>
 
