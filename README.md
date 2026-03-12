@@ -5,8 +5,6 @@
 
 ### **Watch Our Demo Video**
 
-[![Origin Demo Video](https://img.youtube.com/vi/9c2j8wctNhs/0.jpg)](https://youtu.be/pV6Tua9APh8)
-
 **[Watch on YouTube](https://youtu.be/pV6Tua9APh8)**
 
 ---
