@@ -3,7 +3,7 @@
 > AI Agent Orchestration for Institutional Equity Research
 
 **Award: The Biggest Engineering Lift — Most Technically Involved**
-[compiled-7 / SanFranSokyo · YC RFS Spring 2026 AI Hackathon](https://luma.com/rhi9rha9?tk=7oFBLC)
+[compiled-7 / SanFranSokyo · YC RFS Spring 2026 AI Hackathon](https://www.compiled.sh/articles/c0mpiled-7-san-fransokyo)
 
 ### **Watch Our Demo Video**
 
